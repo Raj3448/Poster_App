@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "490476729637",
+    "project_id": "case-study-29aff",
+    "storage_bucket": "case-study-29aff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:490476729637:android:ef44928dd598e7250456cc",
+        "android_client_info": {
+          "package_name": "com.example.case_study"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcj7BM18IyM5wkWlqhxw3kQJAXtodLpJM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
