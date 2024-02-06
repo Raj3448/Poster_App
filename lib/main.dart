@@ -1,4 +1,5 @@
 import 'package:case_study/bloc/autth_bloc.dart';
+import 'package:case_study/cubit/UserDetailsCubit/UserDetailsCubit.dart';
 import 'package:case_study/firebase_options.dart';
 import 'package:case_study/pages/AuthScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => AuthBloc()),
+        BlocProvider(create: (context) => UserDetailsCubit()),
       ],
       child: const MaterialApp(
         title: 'Demo',

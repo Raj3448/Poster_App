@@ -1,6 +1,7 @@
 import 'package:case_study/bloc/autth_bloc.dart';
-import 'package:case_study/pages/dashboard.dart';
-import 'package:case_study/widgets/AuthWidget.dart';
+import 'package:case_study/pages/rootpage.dart';
+
+import 'package:case_study/widgets/auth_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -63,7 +64,7 @@ class _AuthScreenState extends State<AuthScreen>
           if (state is AuthSuccess) {
             Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => DashBoard()),
+                MaterialPageRoute(builder: (context) => RootPage()),
                 (route) => false);
           }
         },
