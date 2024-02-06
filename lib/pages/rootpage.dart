@@ -24,7 +24,7 @@ class _DashBoardState extends State<RootPage> {
   void initState() {
     super.initState();
     _widgetsList = [
-      const DashboardWidget(),
+      DashboardWidget(),
       const UsageWidget(),
       const HistoryWidget(),
       const SupportWidget()
