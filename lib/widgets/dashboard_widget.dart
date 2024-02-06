@@ -121,6 +121,52 @@ class DashboardWidget extends StatelessWidget {
                   label: const Text('Last month'),
                   onPressed: () {},
                   icon: const Icon(Icons.arrow_drop_down)),
+            ),
+            Card(
+              elevation: 5,
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height * 0.09,
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: ListTile(
+                  leading: SizedBox(
+                      height: 50,
+                      width: 50,
+                      child: Image.asset('assets/images/customer-service.png')),
+                  titleAlignment: ListTileTitleAlignment.center,
+                  title: const Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [Text('Bills'), Text('20 Jan 2020')],
+                  ),
+                  trailing: const Text(
+                    '43s',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+              ),
+            ),
+            Card(
+              elevation: 5,
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height * 0.09,
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: ListTile(
+                  leading: SizedBox(
+                      height: 50,
+                      width: 50,
+                      child: Image.asset('assets/images/customer-service.png')),
+                  titleAlignment: ListTileTitleAlignment.center,
+                  title: const Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [Text('Bills'), Text('20 Jan 2020')],
+                  ),
+                  trailing: const Text(
+                    '43s',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+              ),
             )
           ],
         ),
