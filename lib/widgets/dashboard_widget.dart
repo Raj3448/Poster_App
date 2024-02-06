@@ -167,7 +167,7 @@ class DashboardWidget extends StatelessWidget {
                   ),
                 ),
               ),
-            )
+            ).paddingOnly(top: 10)
           ],
         ),
       ),
