@@ -39,10 +39,12 @@ class _AuthWidgetState extends State<AuthWidget> {
   bool _isLogin = true;
   bool _isLoading = false;
 
+  String? role;
+
   Future<void> _submit(BuildContext context) async {
-    if (_storedImage == null && (!_isLogin)) {
+    if ((_storedImage == null || role == null) && (!_isLogin)) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('please select image'),
+        content: Text('missing image or role for select...!!!'),
         duration: Duration(seconds: 3),
       ));
       return;
@@ -61,6 +63,7 @@ class _AuthWidgetState extends State<AuthWidget> {
         username: userName,
         email: email!,
         password: password!,
+        role: role!,
         isLogin: _isLogin,
         context: context,
         storedImage: _storedImage));
@@ -122,7 +125,7 @@ class _AuthWidgetState extends State<AuthWidget> {
         duration: const Duration(seconds: 00),
         height: _isLogin
             ? MediaQuery.of(context).size.height * 0.4
-            : MediaQuery.of(context).size.height * 0.6,
+            : MediaQuery.of(context).size.height * 0.7,
         width: MediaQuery.of(context).size.width * 0.9,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -214,7 +217,7 @@ class _AuthWidgetState extends State<AuthWidget> {
                             return null;
                           },
                           style: const TextStyle(
-                              color: Colors.white, fontSize: 18),
+                              color: Colors.black, fontSize: 18),
                           decoration: const InputDecoration(
                             label: Text(
                               'Username',
@@ -316,6 +319,36 @@ class _AuthWidgetState extends State<AuthWidget> {
                         },
                       ),
                     ),
+                    if (!_isLogin)
+                      SizedBox(
+                        //width: MediaQuery.of(context).size.width * 0.45,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: DropdownButton(
+                              isExpanded: true,
+                              alignment: Alignment.topLeft,
+                              underline: Text(
+                                role == null ? 'Choose Role For SignUp' : role!,
+                                style: const TextStyle(
+                                    color: Colors.black, fontSize: 20),
+                              ),
+                              items: const [
+                                DropdownMenuItem(
+                                  value: 'admin',
+                                  child: Text('Admin Signup'),
+                                ),
+                                DropdownMenuItem(
+                                  value: 'user',
+                                  child: Text('User Signup'),
+                                )
+                              ],
+                              onChanged: (identifier) {
+                                setState(() {
+                                  role = identifier;
+                                });
+                              }),
+                        ),
+                      ),
                   ],
                 )),
             const SizedBox(

@@ -8,12 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zapx/zapx.dart';
 
-class RootPage extends StatefulWidget {
+class RootPageUserLogin extends StatefulWidget {
   @override
-  State<RootPage> createState() => _DashBoardState();
+  State<RootPageUserLogin> createState() => _DashBoardState();
 }
 
-class _DashBoardState extends State<RootPage> {
+class _DashBoardState extends State<RootPageUserLogin> {
   NotchBottomBarController _notchController =
       NotchBottomBarController(index: 0);
 
@@ -95,6 +95,9 @@ class _DashBoardState extends State<RootPage> {
                           return const SizedBox(
                             width: 60,
                           );
+                        }
+                        if (!snapshot.hasData) {
+                          return const SizedBox();
                         }
                         return ListTile(
                           leading: CircleAvatar(

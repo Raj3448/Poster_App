@@ -46,8 +46,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await signInWithEmailAndPassword(
           event.email, event.password, event.context);
     } else {
-      await createUserWithEmailAndPassword(event.username!, event.email,
-          event.password, event.storedImage, event.context, event.storedImage!);
+      await createUserWithEmailAndPassword(
+          event.username!,
+          event.email,
+          event.password,
+          event.storedImage,
+          event.context,
+          event.storedImage!,
+          event.role);
     }
   }
 
@@ -68,11 +74,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       var _auth = FirebaseAuth.instance;
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
+
       if (userCredential.user != null) {
         debugPrint('User has been successfully signed in');
         debugPrint('User Credentials: ${userCredential.user}');
         _receivedUID = userCredential.user!.uid;
-        emit(AuthSuccess(UID: _receivedUID!));
+        final DocumentSnapshot<Map<String, dynamic>> response =
+            await FirebaseFirestore.instance
+                .collection('usersDoc')
+                .doc(_receivedUID)
+                .get();
+        
+        emit(AuthSuccess(UID: _receivedUID!, role:response.data()!['role']));
       } else {
         debugPrint('User is null after sign-in.');
         emit(AuthFailure(error: "User is null after sign-in."));
@@ -101,7 +114,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       String password,
       File? imagefile,
       BuildContext context,
-      File storedImage) async {
+      File storedImage,
+      String role) async {
     debugPrint("In SignUp");
     try {
       var _auth = FirebaseAuth.instance;
@@ -111,7 +125,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         debugPrint('New User has been created successfully');
         debugPrint('New User Credentials: ${userCredential.user}');
         _receivedUID = userCredential.user!.uid;
-        emit(AuthSuccess(UID: _receivedUID!));
+        emit(AuthSuccess(UID: _receivedUID!, role: role));
         final imageRef =
             FirebaseStorage.instance.ref().child('userImage').child('$UID.jpg');
         final imageSnapShot =
@@ -129,6 +143,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             'userName': userName,
             'email': email,
             'imageURL': imageUrl,
+            'role': role.trim()
           });
         }
       } else {
