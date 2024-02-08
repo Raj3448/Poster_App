@@ -11,7 +11,7 @@ class AuthLoginRequested extends AuthEvent {
   final String password;
   final bool isLogin;
   final File? storedImage;
-  final String role;
+  final String? role;
   final BuildContext context;
 
   AuthLoginRequested({
@@ -19,7 +19,7 @@ class AuthLoginRequested extends AuthEvent {
     required this.email,
     required this.password,
     required this.isLogin,
-    required this.storedImage, 
+    required this.storedImage,
     required this.role,
     required this.context,
   });

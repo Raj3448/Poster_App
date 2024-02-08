@@ -1,21 +1,20 @@
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:case_study/cubit/UserDetailsCubit/UserDetailsCubit.dart';
 import 'package:case_study/widgets/dashboard_widget.dart';
-import 'package:case_study/widgets/history_widget.dart';
 import 'package:case_study/widgets/support_widget.dart';
 import 'package:case_study/widgets/usage_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zapx/zapx.dart';
 
-class RootPageUserLogin extends StatefulWidget {
-  const RootPageUserLogin({super.key});
+class RootPageAdminLogin extends StatefulWidget {
+  const RootPageAdminLogin({super.key});
 
   @override
-  State<RootPageUserLogin> createState() => _DashBoardState();
+  State<RootPageAdminLogin> createState() => _DashBoardState();
 }
 
-class _DashBoardState extends State<RootPageUserLogin> {
+class _DashBoardState extends State<RootPageAdminLogin> {
   final NotchBottomBarController _notchController =
       NotchBottomBarController(index: 0);
 
@@ -27,9 +26,7 @@ class _DashBoardState extends State<RootPageUserLogin> {
     super.initState();
     _widgetsList = [
       DashboardWidget(),
-      const UsageWidget(),
-      const HistoryWidget(),
-      const SupportWidget()
+      const SupportWidget(),
     ];
   }
 
@@ -116,7 +113,7 @@ class _DashBoardState extends State<RootPageUserLogin> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const Text(
-                                  'Hello',
+                                  'WelCome to Admin Dashboard',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 22,
@@ -161,18 +158,6 @@ class _DashBoardState extends State<RootPageUserLogin> {
                 activeItem: Image.asset('assets/images/speedometer.png',
                     color: Colors.white),
                 itemLabel: 'Usage'),
-            BottomBarItem(
-                inActiveItem:
-                    Image.asset('assets/images/file.png', color: Colors.grey),
-                activeItem:
-                    Image.asset('assets/images/file.png', color: Colors.white),
-                itemLabel: 'History'),
-            BottomBarItem(
-                inActiveItem: Image.asset('assets/images/support.png',
-                    color: Colors.grey),
-                activeItem: Image.asset('assets/images/support.png',
-                    color: Colors.white),
-                itemLabel: 'Support')
           ],
           notchColor: const Color.fromARGB(255, 250, 110, 40),
           onTap: (index) {

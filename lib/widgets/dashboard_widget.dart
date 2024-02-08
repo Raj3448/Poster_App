@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zapx/zapx.dart';
 
+// ignore: must_be_immutable
 class DashboardWidget extends StatelessWidget {
   DashboardWidget({Key? key}) : super(key: key);
 

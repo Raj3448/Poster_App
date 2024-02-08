@@ -1,3 +1,4 @@
+import 'package:case_study/admin/root_page_admin.dart';
 import 'package:case_study/bloc/autth_bloc.dart';
 import 'package:case_study/pages/rootpage.dart';
 import 'package:case_study/widgets/auth_widget.dart';
@@ -61,9 +62,13 @@ class _AuthScreenState extends State<AuthScreen>
             ));
           }
           if (state is AuthSuccess) {
+            print('Role of User : =====> ${state.role}');
             Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => RootPageUserLogin()),
+                MaterialPageRoute(
+                    builder: (context) => state.role == 'user'
+                        ? const RootPageUserLogin()
+                        : const RootPageAdminLogin()),
                 (route) => false);
           }
         },

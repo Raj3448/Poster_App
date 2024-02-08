@@ -53,7 +53,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           event.storedImage,
           event.context,
           event.storedImage!,
-          event.role);
+          event.role!);
     }
   }
 
@@ -84,8 +84,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                 .collection('usersDoc')
                 .doc(_receivedUID)
                 .get();
-        
-        emit(AuthSuccess(UID: _receivedUID!, role:response.data()!['role']));
+        print('Role of User : ${response.data()!['role']}');
+        emit(AuthSuccess(UID: _receivedUID!, role: response.data()!['role']));
       } else {
         debugPrint('User is null after sign-in.');
         emit(AuthFailure(error: "User is null after sign-in."));
@@ -104,6 +104,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     } catch (error) {
       debugPrint('error during signIn : $error');
       emit(AuthFailure(error: 'error during signIn '));
+    }
+    if (_receivedUID == null) {
+      AuthFailure(error: 'Something went wrong');
     }
     debugPrint('Received UID : $_receivedUID');
   }

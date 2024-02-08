@@ -39,10 +39,10 @@ class _AuthWidgetState extends State<AuthWidget> {
   bool _isLogin = true;
   bool _isLoading = false;
 
-  String? role;
+  String role = '';
 
   Future<void> _submit(BuildContext context) async {
-    if ((_storedImage == null || role == null) && (!_isLogin)) {
+    if ((_storedImage == null || role.isEmpty) && (!_isLogin)) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('missing image or role for select...!!!'),
         duration: Duration(seconds: 3),
@@ -59,11 +59,13 @@ class _AuthWidgetState extends State<AuthWidget> {
     FocusScope.of(context).unfocus();
     _globalKey.currentState!.save();
 
+    print('Role : $role');
+
     context.read<AuthBloc>().add(AuthLoginRequested(
         username: userName,
         email: email!,
         password: password!,
-        role: role!,
+        role: role,
         isLogin: _isLogin,
         context: context,
         storedImage: _storedImage));
@@ -328,7 +330,7 @@ class _AuthWidgetState extends State<AuthWidget> {
                               isExpanded: true,
                               alignment: Alignment.topLeft,
                               underline: Text(
-                                role == null ? 'Choose Role For SignUp' : role!,
+                                role.isEmpty ? 'Choose Role For SignUp' : role,
                                 style: const TextStyle(
                                     color: Colors.black, fontSize: 20),
                               ),
@@ -344,7 +346,7 @@ class _AuthWidgetState extends State<AuthWidget> {
                               ],
                               onChanged: (identifier) {
                                 setState(() {
-                                  role = identifier;
+                                  role = identifier!;
                                 });
                               }),
                         ),
